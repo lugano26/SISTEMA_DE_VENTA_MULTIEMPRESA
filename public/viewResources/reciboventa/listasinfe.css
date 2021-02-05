@@ -1,0 +1,21 @@
+#contenedorEstadisticas
+{
+	padding-right: 5px !important; 
+}
+
+#contenedorEstadisticas::-webkit-scrollbar-track
+{
+	box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	background-color: #F5F5F5;
+}
+
+#contenedorEstadisticas::-webkit-scrollbar
+{
+	width: 5px;
+	background-color: #F5F5F5;
+}
+
+#contenedorEstadisticas::-webkit-scrollbar-thumb
+{
+	background-color: #3c8dbc;
+}

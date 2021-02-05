@@ -1,0 +1,33 @@
+.elementManual
+{
+	border: 1px solid #999999;
+	border-radius: 170px;
+	cursor: pointer;
+	display: inline-table;
+	height: 170px;
+	margin: 7px;
+	transition: background-color 0.4s;
+	width: 170px;
+}
+
+.elementManual:hover
+{
+	background-color: #f5f5f5;
+	text-shadow: 0px 0px 1.4px rgba(0, 0, 0, 0.4);
+	transition: background-color 0.4s;
+}
+
+.elementManual:hover > div> b
+{
+	text-decoration: underline;
+}
+
+.elementManual > div
+{
+	display: table-cell;
+	font-size: 16px;
+	height: 170px;
+	text-align: center;
+	vertical-align: middle;
+	width: 100%;
+}

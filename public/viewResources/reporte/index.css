@@ -1,0 +1,15 @@
+.content-wrapper>.content-header
+{
+	display: none !important;
+}
+
+.small-box h3
+{
+	font-size: 25px;
+}
+
+.reportTitle
+{
+	border-bottom: 1px solid #ccc;
+	text-transform: uppercase;
+}

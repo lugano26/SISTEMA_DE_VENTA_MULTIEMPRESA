@@ -1,0 +1,1 @@
+function clearInputText(c,a){var f=null==a?0:a.length;$("#"+c).find("input[type=text]").each(function(c,d){for(var e=!0,b=0;b<f;b++)if(a[b]==$(d).attr("id")){e=!1;break}e&&$(d).val(null)})}function clearTextArea(c,a){var f=null==a?0:a.length;$("#"+c).find("textarea").each(function(c,d){for(var e=!0,b=0;b<f;b++)if(a[b]==$(d).attr("id")){e=!1;break}e&&$(d).val(null)})};

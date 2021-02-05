@@ -1,0 +1,25 @@
+.globoPorcentajeGanancia
+{
+	background-color: #000000;
+	border-radius: 20px;
+	color: #ffffff;
+	font-size: 11px;
+	left: -12px;
+	padding: 0px 7px 0px 7px;
+	position: absolute;
+	top: 1px;
+	min-width: 30px;
+}
+
+.globoPorcentajeGanancia > span
+{
+	background-color: #000000;
+	border-radius: 0px 100px 0px 0px;
+	bottom: 0.1px;
+	height: 7px;
+	left: -1px;
+	position: absolute;
+	transform: skewX(-40deg) rotate(-20deg);
+	width: 7px;
+	z-index: 1;
+}

@@ -1,0 +1,144 @@
+#contenedorNotificaciones
+{
+	padding-right: 5px !important; 
+}
+
+#contenedorNotificaciones::-webkit-scrollbar-track
+{
+	box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	background-color: #F5F5F5;
+}
+
+#contenedorNotificaciones::-webkit-scrollbar
+{
+	width: 5px;
+	background-color: #F5F5F5;
+}
+
+#contenedorNotificaciones::-webkit-scrollbar-thumb
+{
+	background-color: #3c8dbc;
+}
+.notificationUser
+{
+	-webkit-animation-name: rubberBand;
+	animation-name: rubberBand;
+	-webkit-transform-origin: center bottom;
+	-ms-transform-origin: center bottom;
+	transform-origin: center bottom;
+	-webkit-animation-duration: 1s;
+	animation-duration: 1s;
+	-webkit-animation-fill-mode: both;
+	animation-fill-mode: both;   
+	-webkit-animation-iteration-count: infinite;
+	animation-iteration-count: infinite;  
+}
+
+@-webkit-keyframes rubberBand
+{
+	0%
+	{
+		-webkit-transform: scale3d(1, 1, 1);
+		transform: scale3d(1, 1, 1);
+		color: #fbe54a;
+	}
+
+	30%
+	{
+		-webkit-transform: scale3d(1.25, 0.75, 1);
+		transform: scale3d(1.25, 0.75, 1);
+		color: #ffffff;
+	}
+
+	40%
+	{
+		-webkit-transform: scale3d(0.75, 1.25, 1);
+		transform: scale3d(0.75, 1.25, 1);
+		color: #fbe54a;
+	}
+
+	50%
+	{
+		-webkit-transform: scale3d(1.15, 0.85, 1);
+		transform: scale3d(1.15, 0.85, 1);
+		color: #ffffff;
+	}
+
+	65%
+	{
+		-webkit-transform: scale3d(.95, 1.05, 1);
+		transform: scale3d(.95, 1.05, 1);
+		color: #fbe54a;
+	}
+
+	75%
+	{
+		-webkit-transform: scale3d(1.05, .95, 1);
+		transform: scale3d(1.05, .95, 1);
+		color: #ffffff;
+	}
+
+	100%
+	{
+		-webkit-transform: scale3d(1, 1, 1);
+		transform: scale3d(1, 1, 1);
+		color: #fbe54a;
+	}
+}
+
+@keyframes rubberBand
+{
+	0%
+	{
+		-webkit-transform: scale3d(1, 1, 1);
+		transform: scale3d(1, 1, 1);
+		color: #bdbaa9;
+	}
+
+	30%
+	{
+		-webkit-transform: scale3d(1.25, 0.75, 1);
+		transform: scale3d(1.25, 0.75, 1);
+		color: #fbe54a;
+	}
+
+	40%
+	{
+		-webkit-transform: scale3d(0.75, 1.25, 1);
+		transform: scale3d(0.75, 1.25, 1);
+		color: #ffffff;
+	}
+
+	50%
+	{
+		-webkit-transform: scale3d(1.15, 0.85, 1);
+		transform: scale3d(1.15, 0.85, 1);
+		color: #ffffff;
+	}
+
+	65%
+	{
+		-webkit-transform: scale3d(.95, 1.05, 1);
+		transform: scale3d(.95, 1.05, 1);
+		color: #fbe54a;
+	}
+
+	75%
+	{
+		-webkit-transform: scale3d(1.05, .95, 1);
+		transform: scale3d(1.05, .95, 1);
+		color: #fbe54a;
+	}
+
+	100%
+	{
+		-webkit-transform: scale3d(1, 1, 1);
+		transform: scale3d(1, 1, 1);
+		color: #ffffff;
+	}
+}
+
+#notificacionIcono
+{
+    color: white;
+}

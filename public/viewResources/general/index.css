@@ -1,0 +1,23 @@
+.line-legend , .bar-legend
+{
+	margin-top: 1rem;
+	list-style: none;
+}
+
+.line-legend li , .bar-legend li
+{
+	padding: .2rem 0;
+	font-weight: bold;
+}
+
+.line-legend li span , .bar-legend li span
+{
+	margin-right: .5rem;
+}
+
+.progress-group
+{
+	margin-top: 2rem;
+	padding-left: 1rem;
+	padding-right: 1rem;
+}

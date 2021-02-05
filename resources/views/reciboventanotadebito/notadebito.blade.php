@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="es" style="{{$tEmpresa->formatoComprobante=='Ticket' ? '' : 'margin-top: 25px'}};">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+
+	<style>
+		/* @if($tEmpresa->formatoComprobante=='Ticket') */
+			@page {
+				margin: 7px;
+				margin-right: 30px;
+			}
+		/* @endif */
+	</style>
+</head>
+@if($tEmpresa->formatoComprobante=='Ticket')
+	<body style="font-family: 'Calibri (Body)';font-size: 14px;padding-left: 20px;">
+		<div style="text-align: center;">*** N.D. ELECTRÓNICA : {{$tReciboVentaNotaDebito->numeroRecibo}} ***</div>
+		<br>
+		<div style="text-align: center;"><b>{{$tEmpresa->ruc}} - {{$tEmpresa->razonSocial}}</b></div>
+		<br>
+		{!!$tEmpresa->toficina[0]->descripcionComercialComprobante!!}
+		<hr>
+		<table>
+			<tbody>
+				<tr>
+					<td><b>Señor(es)</b></td>
+					<td>{{$tReciboVentaNotaDebito->treciboventa->nombreCompletoCliente}}</td>
+				</tr>
+				@if(trim($tReciboVentaNotaDebito->treciboventa->documentoCliente!='00000000'))
+					<tr>
+						<td><b>{{(strlen($tReciboVentaNotaDebito->treciboventa->documentoCliente)==8 ? 'D.N.I.' : 'R.U.C.')}}</b></td>
+						<td>{{$tReciboVentaNotaDebito->treciboventa->documentoCliente}}</td>
+					</tr>
+				@endif
+				@if(trim($tReciboVentaNotaDebito->treciboventa->direccionCliente!=''))
+					<tr>
+						<td><b>Dirección</b></td>
+						<td>{{$tReciboVentaNotaDebito->treciboventa->direccionCliente}}</td>
+					</tr>
+				@endif
+				<tr>
+					<td><b>Fecha de emisión</b></td>
+					<td>{{substr($tReciboVentaNotaDebito->fechaComprobanteEmitido, 0, 10)}}</td>
+				</tr>
+			</tbody>
+		</table>
+		<hr>
+		<table style="width: 100%;">
+			<thead>
+				<tr>
+					<th style="text-align: center;">C/U</th>
+					<th>DESC.</th>
+					<th style="text-align: center;">T.</th>
+				</tr>
+			</thead>
+			<tbody>
+				@foreach($tReciboVentaNotaDebito->treciboventanotadebitodetalle as $value)
+					<tr>
+						<td style="border-bottom: 1px solid #eeeeee;text-align: center;">{{number_format($value->cantidadProducto, 3, '.', '')}}<br>{{$value->unidadMedidaProducto}}</td>
+						<td style="border-bottom: 1px solid #eeeeee;text-align: left;"><div>{{$value->nombreProducto.' '.$value->informacionAdicionalProducto}}</div></td>
+						<td style="border-bottom: 1px solid #eeeeee;text-align: center;">{{number_format($value->precioVentaTotalProducto, 2)}}</td>
+					</tr>
+				@endforeach
+				<tr>
+					<td colspan="2" style="text-align: right;vertical-align: top;">
+						<div style="border: 1px solid transparent;margin: 4px;margin-top: 2px;">S.T. ({{$tReciboVentaNotaDebito->treciboventa->divisa=='Soles' ? 'S/' : 'US$'}}):</div>
+						<div style="border: 1px solid transparent;margin: 4px;">I.G.V. ({{$tReciboVentaNotaDebito->treciboventa->divisa=='Soles' ? 'S/' : 'US$'}}):</div>
+						<div style="border: 1px solid transparent;margin: 4px;">Total ({{$tReciboVentaNotaDebito->treciboventa->divisa=='Soles' ? 'S/' : 'US$'}}):</div>
+					</td>
+					<td style="text-align: center;vertical-align: top;">
+						<div style="border: 1px solid #999999;margin: 4px;margin-top: 2px;">{{$tReciboVentaNotaDebito->subTotal}}</div>
+						<div style="border: 1px solid #999999;margin: 4px;">{{$tReciboVentaNotaDebito->igv}}</div>
+						<div style="border: 1px solid #999999;margin: 4px;">{{$tReciboVentaNotaDebito->total}}</div>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		<br>
+		<div style="border: 1px solid #999999;margin: 2px;padding: 5px;"><b>SON: </b>{{$valorTotalLetras}} {{$tReciboVentaNotaDebito->treciboventa->divisa=='Soles' ? 'soles' : 'dólares americanos'}}</div>
+		<div style="border: 1px solid #999999;margin: 2px;padding: 5px;"><b>MOTIVO DE LA NOTA DE DÉBITO: </b>{{$tReciboVentaNotaDebito->descripcionMotivo}}</div>
+		<div style="border: 1px solid #999999;margin: 2px;padding: 5px;"><b>DOCUMENTO QUE MODIFICA LA NOTA DE DÉBITO: </b>{{$tReciboVentaNotaDebito->treciboventa->numeroRecibo}}</div>
+		<div style="border: 1px solid #999999;margin: 2px;padding: 5px;"><b>EMISIÓN DEL COMPROBANTE DE PAGO QUE MODIFICA: </b>{{substr($tReciboVentaNotaDebito->treciboventa->created_at, 0, 10)}}</div>
+		<hr>
+		<b>{{$tReciboVentaNotaDebito->hash}}</b>
+	</body>
+@endif
+@if($tEmpresa->formatoComprobante=='Normal')
+	<body style="font-size: 12px;text-align: center;">
+		<table style="text-align: center;width: 100%;">
+			<tbody>
+				<tr>
+					<td style="width: 75px;">
+						<img src="{{$base64Logo}}" width="77">
+					</td>
+					<td>
+						<h2 style="margin-bottom: 7px;margin-top: 0px;padding-top: 0px;">{{$tEmpresa->razonSocial}}</h2>
+						<div style="text-align: justify;">{!!$tEmpresa->toficina[0]->descripcionComercialComprobante!!}</div>
+					</td>
+					<td style="width: 270px;">
+						<div style="border: 2px solid #4B89CC;">
+							<div style="font-size: 15px;padding: 5px;">R.U.C. {{$tEmpresa->ruc}}</div>
+							<div style="background-color: #f5f5f5;font-size: 15px;margin: 1px;padding: 7px;">NOTA DE DÉBITO ELECTRÓNICA</div>
+							<div style="font-size: 15px;padding: 5px;">{{$tReciboVentaNotaDebito->numeroRecibo}}</div>
+						</div>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		<table style="border-top: 1px solid #cccccc;padding-top: 7px;width: 100%;">
+			<tbody>
+				<tr>
+					<td style="width: 550px;">
+						<fieldset>
+							<legend><b>Señor(es)</b></legend>
+							{{$tReciboVentaNotaDebito->treciboventa->nombreCompletoCliente}}
+						</fieldset>
+					</td>
+					<td style="text-align: center;">
+						<fieldset>
+							<legend><b>{{(strlen($tReciboVentaNotaDebito->treciboventa->documentoCliente)==8 ? 'D.N.I.' : 'R.U.C.')}}</b></legend>
+							{{$tReciboVentaNotaDebito->treciboventa->documentoCliente}}
+						</fieldset>
+					</td>
+				</tr>
+				<tr>
+					<td style="padding-top: 5px;width: 550px;">
+						<fieldset>
+							<legend><b>Dirección</b></legend>
+							{{$tReciboVentaNotaDebito->treciboventa->direccionCliente}}
+						</fieldset>
+						
+					</td>
+					<td style="padding-top: 5px;text-align: center;">
+						<fieldset>
+							<legend><b>Fecha de emisión</b></legend>
+							{{substr($tReciboVentaNotaDebito->fechaComprobanteEmitido, 0, 10)}}
+						</fieldset>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		<table style="width: 100%;">
+			<thead>
+				<tr>				
+					<th style="border-bottom: 1px solid #000000;text-align: center;width: 70px;">CANT.</th>
+					<th style="border-bottom: 1px solid #000000;text-align: center;width: 70px;">UNIDAD</th>
+					<th style="border-bottom: 1px solid #000000;">DESCRIPCIÓN</th>
+					<th style="border-bottom: 1px solid #000000;text-align: center;width: 100px;">P. UNIT.</th>
+					<th style="border-bottom: 1px solid #000000;text-align: center;width: 120px;">VALOR DE VENTA</th>
+				</tr>
+			</thead>
+			<tbody>
+				@foreach($tReciboVentaNotaDebito->treciboventanotadebitodetalle as $value)
+					<tr>
+						<td style="border-bottom: 1px solid #eeeeee;text-align: center;">{{number_format($value->cantidadProducto, 3, '.', '')}}</td>
+						<td style="border-bottom: 1px solid #eeeeee;text-align: center;">{{$value->unidadMedidaProducto}}</td>
+						<td style="border-bottom: 1px solid #eeeeee;text-align: left;">{{$value->nombreProducto.' '.$value->informacionAdicionalProducto}}</td>
+						<td style="border-bottom: 1px solid #eeeeee;text-align: center;">{{$tReciboVentaNotaDebito->treciboventa->divisa=='Soles' ? 'S/' : 'US$'}}{{$value->precioVentaUnitarioProducto}}</td>
+						<td style="border-bottom: 1px solid #eeeeee;text-align: center;">{{$tReciboVentaNotaDebito->treciboventa->divisa=='Soles' ? 'S/' : 'US$'}}{{number_format($value->precioVentaTotalProducto, 2)}}</td>
+					</tr>
+				@endforeach
+				<tr>
+					<td colspan="3" style="vertical-align: top;">
+						<div style="border: 1px solid #999999;margin: 2px;padding: 5px;"><b>SON: </b>{{$valorTotalLetras}} {{$tReciboVentaNotaDebito->treciboventa->divisa=='Soles' ? 'soles' : 'dólares americanos'}}</div>
+						<div style="border: 1px solid #999999;margin: 2px;padding: 5px;"><b>MOTIVO DE LA NOTA DE DÉBITO: </b>{{$tReciboVentaNotaDebito->descripcionMotivo}}</div>
+						<div style="border: 1px solid #999999;margin: 2px;padding: 5px;"><b>DOCUMENTO QUE MODIFICA LA NOTA DE DÉBITO: </b>{{$tReciboVentaNotaDebito->treciboventa->numeroRecibo}}</div>
+						<div style="border: 1px solid #999999;margin: 2px;padding: 5px;"><b>EMISIÓN DEL COMPROBANTE DE PAGO QUE MODIFICA: </b>{{substr($tReciboVentaNotaDebito->treciboventa->created_at, 0, 10)}}</div>
+					</td>
+					<td style="text-align: right;vertical-align: top;">
+						<div style="border: 1px solid transparent;margin: 4px;margin-top: 2px;padding: 5px;">Sub total:</div>
+						<div style="border: 1px solid transparent;margin: 4px;padding: 5px;">I.G.V.:</div>
+						<div style="border: 1px solid transparent;margin: 4px;padding: 5px;">Total:</div>
+					</td>
+					<td style="text-align: center;vertical-align: top;">
+						<div style="border: 1px solid #999999;margin: 4px;margin-top: 2px;padding: 5px;">{{$tReciboVentaNotaDebito->treciboventa->divisa=='Soles' ? 'S/' : 'US$'}}{{$tReciboVentaNotaDebito->subTotal}}</div>
+						<div style="border: 1px solid #999999;margin: 4px;padding: 5px;">{{$tReciboVentaNotaDebito->treciboventa->divisa=='Soles' ? 'S/' : 'US$'}}{{$tReciboVentaNotaDebito->igv}}</div>
+						<div style="border: 1px solid #999999;margin: 4px;padding: 5px;">{{$tReciboVentaNotaDebito->treciboventa->divisa=='Soles' ? 'S/' : 'US$'}}{{$tReciboVentaNotaDebito->total}}</div>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		<hr>
+		<b>{{$tReciboVentaNotaDebito->hash}}</b>
+	</body>
+@endif
+</html>
